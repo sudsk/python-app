@@ -1,0 +1,29 @@
+redis-ha:
+  enabled: false
+
+controller:
+  replicas: 1
+
+repoServer:
+  replicas: 1
+
+applicationSet:
+  replicas: 1
+
+global:
+  domain: argocd.35.189.105.10.nip.io
+
+certificate:
+  enabled: false # Set to true only if you have cert-manager installed
+
+server:
+  replicas: 1
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    # Insecure is often needed if you're not using valid TLS certs at the ingress level
+    # but the argo-server is still trying to serve HTTPS.
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    tls: true
