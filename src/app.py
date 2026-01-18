@@ -5,9 +5,9 @@ app = Flask(__name__)
 @app.route('/api/v1/details')
 def details():
     return jsonify({
-        'name': 'John Doe',
-        'age': 30,
-        'city': 'New York'
+        'hostname': socket.gethostname(),
+        'ip': socket.gethostbyname(socket.gethostname()),
+        'timestamp': datetime.datetime.now().isoformat()
     })
 
 @app.route('/api/v1/healthz')
