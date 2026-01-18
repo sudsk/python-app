@@ -4,7 +4,8 @@ metadata:
   name: python-app-ingress
 spec:
   rules:
-    - http:
+  - host: python-app.test.com  
+    http:
         paths:
           - path: /api/v1
             pathType: Prefix
