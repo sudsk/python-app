@@ -42,6 +42,16 @@ jobs:
     runs-on: self-hosted
     needs: ci
     steps:
+      - name: Install Argocd CLI
+        run: |
+          if ! command -v argocd &> /dev/null; then
+            echo "Argocd CLI not found, installing..."
+            curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+            chmod +x argocd-linux-amd64
+            sudo mv argocd-linux-amd64 /usr/local/bin/argocd
+          else
+            echo "Argocd CLI is already installed."
+          fi
       - name: Argocd App Sync
         run: |
           argocd login argocd.35.189.105.10.nip.io \
