@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: python-app
-      image: suds123/python-app:v1
+      image: suds123/python-app:latest
       ports:
         - containerPort: 8000
