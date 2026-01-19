@@ -10,7 +10,7 @@ def details():
         'hostname': socket.gethostname(),
         'ip': socket.gethostbyname(socket.gethostname()),
         'timestamp': datetime.datetime.now().isoformat(),
-        'message': 'Test of New CI/CD pipeline!',
+        'message': 'Testing New CI/CD pipeline!',
     })
 
 @app.route('/api/v1/healthz')
