@@ -9,7 +9,8 @@ def details():
     return jsonify({
         'hostname': socket.gethostname(),
         'ip': socket.gethostbyname(socket.gethostname()),
-        'timestamp': datetime.datetime.now().isoformat()
+        'timestamp': datetime.datetime.now().isoformat(),
+        'message': 'Hello World',
     })
 
 @app.route('/api/v1/healthz')
