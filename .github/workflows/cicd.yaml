@@ -1,4 +1,4 @@
-name: ci
+name: cicd
 
 on:
   push:
@@ -7,10 +7,10 @@ on:
       - 'Dockerfile'
       - 'requirements.txt'
     branches:
-      - change_to_main
+      - main
 
 jobs:
-  docker:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,3 +38,16 @@ jobs:
           tags: |
             suds123/python-app:latest
             suds123/python-app:${{ steps.vars.outputs.sha_short }}
+  cd:
+    runs-on: self-hosted
+    needs: ci
+    steps:
+      - name: Argocd App Sync
+        run: |
+          argocd login argocd.35.189.105.10.nip.io \
+            --username admin \
+            --password ${{ secrets.ARGOCD_PASSWORD }} \
+            --insecure \
+            --grpc-web
+          argocd app sync python-app
+
